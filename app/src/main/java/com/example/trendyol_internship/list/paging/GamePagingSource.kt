@@ -1,9 +1,9 @@
-package com.example.trendyol_internship.paging
+package com.example.trendyol_internship.list.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.trendyol_internship.api.ApiService
-import com.example.trendyol_internship.model.Game
+import com.example.trendyol_internship.list.api.ApiService
+import com.example.trendyol_internship.list.model.Game
 
 class GamePagingSource (private val apiService: ApiService) : PagingSource<Int, Game>() {
 

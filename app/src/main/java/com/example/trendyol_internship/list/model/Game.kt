@@ -1,4 +1,4 @@
-package com.example.trendyol_internship.model
+package com.example.trendyol_internship.list.model
 
 data class Game(val id: Int?,
                 val name: String?,

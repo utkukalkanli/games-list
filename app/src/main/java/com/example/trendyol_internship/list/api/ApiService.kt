@@ -1,6 +1,6 @@
-package com.example.trendyol_internship.api
+package com.example.trendyol_internship.list.api
 
-import com.example.trendyol_internship.model.ResponseApi
+import com.example.trendyol_internship.list.model.ResponseApi
 import com.example.trendyol_internship.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
