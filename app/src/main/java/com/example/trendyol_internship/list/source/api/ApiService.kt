@@ -1,6 +1,6 @@
-package com.example.trendyol_internship.list.api
+package com.example.trendyol_internship.list.source.api
 
-import com.example.trendyol_internship.list.model.ResponseApi
+import com.example.trendyol_internship.list.model.ApiResponse
 import com.example.trendyol_internship.utils.Constants
 import retrofit2.Response
 import retrofit2.http.GET
@@ -13,5 +13,5 @@ interface ApiService {
         // @Query("count") size:Int,
         @Query("page") page: Int
 
-    ): Response<ResponseApi>
+    ): Response<ApiResponse>
 }

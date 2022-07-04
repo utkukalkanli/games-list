@@ -1,6 +1,6 @@
 package com.example.trendyol_internship.list.di
 
-import com.example.trendyol_internship.list.api.ApiService
+import com.example.trendyol_internship.list.source.api.ApiService
 import com.example.trendyol_internship.utils.Constants
 import dagger.Module
 import dagger.Provides

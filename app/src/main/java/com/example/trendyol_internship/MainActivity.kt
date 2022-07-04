@@ -6,9 +6,9 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.trendyol_internship.list.adapter.ListGameAdapter
+import com.example.trendyol_internship.list.adapter.GameListAdapter
 import com.example.trendyol_internship.databinding.ActivityMainBinding
-import com.example.trendyol_internship.list.viewmodel.ListGameViewModel
+import com.example.trendyol_internship.ui.listing.viewmodel.GameListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
@@ -17,8 +17,8 @@ import kotlinx.coroutines.flow.collect
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var gameAdapter: ListGameAdapter
-    private val viewModel: ListGameViewModel by viewModels()
+    private lateinit var gameAdapter: GameListAdapter
+    private val viewModel: GameListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
 
-        gameAdapter = ListGameAdapter()
+        gameAdapter = GameListAdapter()
 
         binding.recyclerView.apply {
             adapter = gameAdapter

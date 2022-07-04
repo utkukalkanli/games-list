@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.trendyol_internship.databinding.GameLayoutBinding
-import com.example.trendyol_internship.list.model.Game
+import com.example.trendyol_internship.list.model.ListGame
 
-class ListGameAdapter: PagingDataAdapter<Game, ListGameAdapter.ImageViewHolder>(diffCallback) {
+class GameListAdapter: PagingDataAdapter<ListGame, GameListAdapter.ImageViewHolder>(diffCallback) {
 
     inner class ImageViewHolder(val binding: GameLayoutBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -41,12 +41,12 @@ class ListGameAdapter: PagingDataAdapter<Game, ListGameAdapter.ImageViewHolder>(
     }
 
     companion object {
-        val diffCallback = object : DiffUtil.ItemCallback<Game>() {
-            override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
+        val diffCallback = object : DiffUtil.ItemCallback<ListGame>() {
+            override fun areItemsTheSame(oldItem: ListGame, newItem: ListGame): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
+            override fun areContentsTheSame(oldItem: ListGame, newItem: ListGame): Boolean {
                 return oldItem == newItem
             }
         }
