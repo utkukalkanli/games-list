@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.detail.DetailFragment">
+
+        <TextView
+            android:id="@+id/detail_fragment_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail fragment"
+            android:textSize="26sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp">
+        </TextView>
+
+        <Button
+            android:id="@+id/to_listing_fragment_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To listing fragment"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp">
+        </Button>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/my_navigation"
+    app:startDestination="@id/listingFragment">
+
+    <fragment
+        android:id="@+id/listingFragment"
+        android:name="com.example.trendyol_internship.ui.listing.ListingFragment"
+        android:label="ListingFragment" >
+        <action
+            android:id="@+id/action_listingFragment_to_detailFragment"
+            app:destination="@id/detailFragment" >
+            <argument
+                android:name="id"
+                android:defaultValue="0" />
+        </action>
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.trendyol_internship.ui.detail.DetailFragment"
+        android:label="DetailFragment" >
+        <action
+            android:id="@+id/action_detailFragment_to_listingFragment"
+            app:destination="@id/listingFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.trendyol_internship.ui.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+</navigation>
