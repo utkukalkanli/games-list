@@ -34,10 +34,11 @@ class DetailFragment : Fragment() {
             gameID = DetailFragmentArgs.fromBundle(it).id
             println(gameID)
         }
-
+        /**
         to_listing_fragment_button.setOnClickListener{
             val action = DetailFragmentDirections.actionDetailFragmentToListingFragment()
             Navigation.findNavController(it).navigate(action)
         }
+        */
     }
 }

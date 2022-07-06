@@ -26,10 +26,12 @@ class ListingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val gameID = 5
+        /**
         listing_fragment_button.setOnClickListener{
             val action = ListingFragmentDirections.actionListingFragmentToDetailFragment(gameID)
             Navigation.findNavController(it).navigate(action)
         }
+        */
     }
 
 }
