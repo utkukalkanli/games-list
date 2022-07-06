@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/listingFragment"
-        android:name="com.example.trendyol_internship.ui.listing.ListingFragment"
+        android:name="com.example.trendyol_internship.ui.listing.view.ListingFragment"
         android:label="ListingFragment" >
         <action
             android:id="@+id/action_listingFragment_to_detailFragment"
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.trendyol_internship.ui.detail.DetailFragment"
+        android:name="com.example.trendyol_internship.ui.detail.view.DetailFragment"
         android:label="DetailFragment" >
         <action
             android:id="@+id/action_detailFragment_to_listingFragment"

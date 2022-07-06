@@ -15,7 +15,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/gameListRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="1dp"
@@ -28,7 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/listingError"
+                android:id="@+id/gameListError"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/listing_error_message"
@@ -39,7 +39,7 @@
             </TextView>
 
             <ProgressBar
-                android:id="@+id/gamesLoading"
+                android:id="@+id/gameListLoading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
