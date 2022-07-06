@@ -36,32 +36,27 @@ class DetailFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
         viewModel.getDataFromRoom()
 
-
-
+        // fragmentlar arası data transferi bu sekilde yapılabilir
         arguments?.let {
             gameID = DetailFragmentArgs.fromBundle(it).id
             println(gameID)
         }
 
         observeLiveData()
-        /**
-        to_listing_fragment_button.setOnClickListener{
-            val action = DetailFragmentDirections.actionDetailFragmentToListingFragment()
-            Navigation.findNavController(it).navigate(action)
-        }
-        */
     }
 
     private fun observeLiveData(){
-        viewModel.gameDetailLiveData.observe(viewLifecycleOwner, Observer{ game->
-            game?.let {
-                gameName.text = game.name
-                metacritic.text = game.metacritic.toString()
-                gameDescription.text = game.description_raw
-                releaseDate.text = "20.02.2020"
-                genres.text = "null"
-                playTime.text = "0"
-                publishers.text = "---"
+        viewModel.gameDetailLiveData.observe(viewLifecycleOwner, Observer{ gameDetail->
+            gameDetail?.let {
+                gameName.text = "Name: " + gameDetail.name
+                metacritic.text = "Score: " + gameDetail.metaCritic.toString()
+                gameDescription.text = "Description: " + gameDetail.descriptionRaw
+                releaseDate.text = "Released: " + gameDetail.releaseDate.toString()
+                genres.text = "Detail: " + gameDetail.genres.toString()
+                playTime.text = "Playtime: " + gameDetail.playTime.toString()
+                publishers.text = "Publishers: " + gameDetail.publishers.toString()
+                redditURL.text = "Reddit: " + gameDetail.redditURL
+                websiteURL.text = "Website: " + gameDetail.websiteURL
                 // gameDetailImage.imageView =
             }
         })

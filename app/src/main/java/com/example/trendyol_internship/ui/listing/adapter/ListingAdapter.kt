@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trendyol_internship.R
-import com.example.trendyol_internship.data.listing.Game
+import com.example.trendyol_internship.data.listing.model.Game
 import com.example.trendyol_internship.ui.listing.view.ListingFragmentDirections
+import com.example.trendyol_internship.util.downloadFromURL
+import com.example.trendyol_internship.util.placeholderProgressBar
 import kotlinx.android.synthetic.main.grid_cell.view.*
 
 class ListingAdapter(val gameList: ArrayList<Game>): RecyclerView.Adapter<ListingAdapter.GameListViewHolder>() {
@@ -27,9 +29,17 @@ class ListingAdapter(val gameList: ArrayList<Game>): RecyclerView.Adapter<Listin
     // ViewHolder olustu, gameList array'i geldi, viewların değerlerini değiştiriyor
     override fun onBindViewHolder(holder: GameListViewHolder, position: Int) {
         holder.view.name.text = gameList[position].name
+        holder.view.imageView.downloadFromURL(gameList[position].backgroundImage, placeholderProgressBar(holder.view.context))
+
         holder.view.setOnClickListener{
-            val action = ListingFragmentDirections.actionListingFragmentToDetailFragment()
-            Navigation.findNavController(it).navigate(action)
+            val action = gameList[position].id?.let { it1 ->
+                ListingFragmentDirections.actionListingFragmentToDetailFragment(
+                    it1
+                )
+            }
+            if (action != null) {
+                Navigation.findNavController(it).navigate(action)
+            }
         }
     }
     // kac tane row olusturacagını söylüyoruz

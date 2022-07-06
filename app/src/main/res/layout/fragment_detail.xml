@@ -103,6 +103,31 @@
         android:padding="10dp">
     </TextView>
 
+    <TextView
+        android:id="@+id/redditURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/publishers"
+        android:text="Reddit URL"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp">
+    </TextView>
+
+
+    <TextView
+        android:id="@+id/websiteURL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/redditURL"
+        android:text="Website URL"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp">
+    </TextView>
+
 
 </RelativeLayout>
 </layout>

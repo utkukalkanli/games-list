@@ -45,14 +45,14 @@ class ListingFragment : Fragment() {
         gameListRecyclerView.layoutManager = GridLayoutManager(context,2)
         gameListRecyclerView.adapter = listingAdapter
 
-        observeLiveData()
-        /**
-        val gameID = 5
-        listing_fragment_button.setOnClickListener{
-            val action = ListingFragmentDirections.actionListingFragmentToDetailFragment(gameID)
-            Navigation.findNavController(it).navigate(action)
+        swipeRefreshLayout.setOnRefreshListener {
+            gameListRecyclerView.visibility = View.GONE
+            gameListError.visibility = View.GONE
+            gameListLoading.visibility = View.GONE
+            viewModel.refreshData()
+            swipeRefreshLayout.isRefreshing = false
         }
-        */
+        observeLiveData()
     }
 
     private fun observeLiveData(){
