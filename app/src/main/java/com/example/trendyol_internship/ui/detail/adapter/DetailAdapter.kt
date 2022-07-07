@@ -8,7 +8,7 @@ import com.example.trendyol_internship.R
 import com.example.trendyol_internship.data.detail.model.GameDetail
 import com.example.trendyol_internship.util.downloadFromURL
 import com.example.trendyol_internship.util.placeholderProgressBar
-import kotlinx.android.synthetic.main.card_view.view.*
+import kotlinx.android.synthetic.main.card_view_game.view.*
 
 
 class DetailAdapter(val gameDetail: GameDetail): RecyclerView.Adapter<DetailAdapter.GameDetailViewHolder>(){
