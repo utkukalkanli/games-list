@@ -46,3 +46,4 @@ data class GameDetail(
     val websiteURL: String?
 
 )
+

@@ -10,7 +10,7 @@ import com.example.trendyol_internship.data.listing.model.Game
 import com.example.trendyol_internship.ui.listing.view.ListingFragmentDirections
 import com.example.trendyol_internship.util.downloadFromURL
 import com.example.trendyol_internship.util.placeholderProgressBar
-import kotlinx.android.synthetic.main.grid_cell.view.*
+import kotlinx.android.synthetic.main.card_view.view.*
 
 class ListingAdapter(val gameList: ArrayList<Game>): RecyclerView.Adapter<ListingAdapter.GameListViewHolder>() {
 
@@ -22,7 +22,7 @@ class ListingAdapter(val gameList: ArrayList<Game>): RecyclerView.Adapter<Listin
     // GameListViewHolder döndürüyor, grid_cell.xml layout ile adapter'ı birbirine bağlıyor
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.grid_cell, parent, false)
+        val view = inflater.inflate(R.layout.card_view, parent, false)
         return GameListViewHolder(view)
     }
 

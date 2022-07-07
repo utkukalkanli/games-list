@@ -28,7 +28,7 @@ class ListingViewModel: ViewModel() {
 
         disposable.add(
             listingAPIService.getList()
-                .subscribeOn(Schedulers.newThread()) // veri cekme isi arkaplanda, asenkron bir sekilde
+                .subscribeOn(Schedulers.io()) // veri cekme isi arkaplanda, asenkron bir sekilde
                 .observeOn(AndroidSchedulers.mainThread()) // gösterme isi main thread'de
                 .subscribeWith(object : DisposableSingleObserver<List<Game>>(){
                     override fun onSuccess(t: List<Game>) {
