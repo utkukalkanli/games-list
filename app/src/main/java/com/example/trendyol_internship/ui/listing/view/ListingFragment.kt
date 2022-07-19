@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.*
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trendyol_internship.R
 import com.example.trendyol_internship.ui.listing.adapter.ListingAdapter
 import com.example.trendyol_internship.ui.listing.viewmodel.ListingViewModel

@@ -1,6 +1,5 @@
 package com.example.trendyol_internship.data.listing.paging
 
-import android.net.Uri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.trendyol_internship.data.listing.model.Game

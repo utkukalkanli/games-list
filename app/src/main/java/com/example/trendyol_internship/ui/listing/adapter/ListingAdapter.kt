@@ -5,22 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trendyol_internship.R
 import com.example.trendyol_internship.data.listing.model.Game
-import com.example.trendyol_internship.ui.listing.view.ListingFragmentDirections
-import com.example.trendyol_internship.util.downloadImage
-import kotlinx.android.synthetic.main.grid_cell.view.*
+
 
 
 class ListingAdapter(): PagingDataAdapter<Game, ListingAdapter.MyViewHolder>(DiffUtilCallBack()), CardViewClickListener {
 
     override fun onBindViewHolder(holder: ListingAdapter.MyViewHolder, position: Int) {
+        // holder.view.imageView.downloadFromURL(gameDetail.backgroundImage, placeholderProgressBar(holder.view.context))
         holder.bind(getItem(position)!!)
     }
 
@@ -34,9 +31,9 @@ class ListingAdapter(): PagingDataAdapter<Game, ListingAdapter.MyViewHolder>(Dif
         val imageView: ImageView = view.findViewById(R.id.imageView)
         val tvName: TextView = view.findViewById(R.id.gameName)
 
+
         fun bind(data: Game) {
             tvName.text = data.name
-            // downloadImage(view = imageView, url = data.backgroundImage)
             Glide.with(imageView)
                 .load(data.background_image)
                 .into(imageView)
