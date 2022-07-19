@@ -5,4 +5,5 @@
     <string name="listing_error_message">Error on listing games...</string>
     <string name="name_place_holder">game name</string>
     <string name="cover">game cover</string>
+    <string name="search_title">Search</string>
 </resources>

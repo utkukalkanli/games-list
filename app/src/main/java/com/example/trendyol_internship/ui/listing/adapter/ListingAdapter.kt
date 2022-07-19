@@ -14,7 +14,7 @@ import com.example.trendyol_internship.data.listing.model.Game
 
 
 
-class ListingAdapter(): PagingDataAdapter<Game, ListingAdapter.MyViewHolder>(DiffUtilCallBack()), CardViewClickListener {
+class ListingAdapter(): PagingDataAdapter<Game, ListingAdapter.MyViewHolder>(DiffUtilCallBack()) {
 
     override fun onBindViewHolder(holder: ListingAdapter.MyViewHolder, position: Int) {
         // holder.view.imageView.downloadFromURL(gameDetail.backgroundImage, placeholderProgressBar(holder.view.context))
@@ -48,10 +48,6 @@ class ListingAdapter(): PagingDataAdapter<Game, ListingAdapter.MyViewHolder>(Dif
         override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
             return oldItem.name == newItem.name && oldItem.id == newItem.id && oldItem.background_image == newItem.background_image
         }
-    }
-
-    override fun onCardViewClicked(view: View) {
-        println(view.id)
     }
 
 }

@@ -5,8 +5,8 @@ import com.example.trendyol_internship.util.Constants
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface RetroService {
-    @GET(Constants.API_KEY)
+interface GameService {
+    @GET("games" + Constants.API_KEY)
     suspend fun getGamesFromAPI(
         @Query("page") query: Int
     ): ApiResponse

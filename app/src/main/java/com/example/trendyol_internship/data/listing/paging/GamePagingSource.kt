@@ -3,9 +3,9 @@ package com.example.trendyol_internship.data.listing.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.trendyol_internship.data.listing.model.Game
-import com.example.trendyol_internship.data.listing.network.RetroService
+import com.example.trendyol_internship.data.listing.network.GameService
 
-class GamePagingSource(val apiService: RetroService):PagingSource<Int, Game>() {
+class GamePagingSource(val apiService: GameService):PagingSource<Int, Game>() {
 
     override fun getRefreshKey(state: PagingState<Int, Game>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
