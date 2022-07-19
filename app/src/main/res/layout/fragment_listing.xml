@@ -28,27 +28,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:background="@color/black" />
 
-            <TextView
-                android:id="@+id/gameListError"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/listing_error_message"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-            </TextView>
-
-            <ProgressBar
-                android:id="@+id/gameListLoading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-            </ProgressBar>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

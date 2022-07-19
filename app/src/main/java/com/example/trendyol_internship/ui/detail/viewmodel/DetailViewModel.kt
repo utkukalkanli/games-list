@@ -4,8 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.trendyol_internship.data.detail.model.GameDetail
 import com.example.trendyol_internship.data.detail.service.DetailAPIService
-import com.example.trendyol_internship.data.listing.model.Game
-import com.example.trendyol_internship.data.listing.service.ListingAPIService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver

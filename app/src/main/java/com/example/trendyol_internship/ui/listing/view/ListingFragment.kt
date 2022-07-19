@@ -5,22 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.*
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.trendyol_internship.R
 import com.example.trendyol_internship.ui.listing.adapter.ListingAdapter
 import com.example.trendyol_internship.ui.listing.viewmodel.ListingViewModel
 import kotlinx.android.synthetic.main.fragment_listing.*
+import kotlinx.coroutines.flow.collectLatest
 
 class ListingFragment : Fragment() {
 
-    private lateinit var viewModel: ListingViewModel
-    private val listingAdapter = ListingAdapter(arrayListOf())
-
+    //private val listingAdapter = ListingAdapter()
+    private lateinit var listingAdapter: ListingAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,56 +37,31 @@ class ListingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // fragment'ımıza viewmodel bağlıyoruz
-        viewModel = ViewModelProviders.of(this).get(ListingViewModel::class.java)
-        viewModel.refreshData()
+        initRecyclerView()
+        initViewModel()
 
-        //gameListRecyclerView.layoutManager = LinearLayoutManager(context)
-        gameListRecyclerView.layoutManager = GridLayoutManager(context,2)
-        gameListRecyclerView.adapter = listingAdapter
+    }
 
-        swipeRefreshLayout.setOnRefreshListener {
-            gameListRecyclerView.visibility = View.GONE
-            gameListError.visibility = View.GONE
-            gameListLoading.visibility = View.GONE
-            viewModel.refreshData()
-            swipeRefreshLayout.isRefreshing = false
+    private fun initRecyclerView() {
+        gameListRecyclerView.apply {
+            layoutManager = GridLayoutManager(context,2)
+            val decoration  = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            addItemDecoration(decoration)
+            listingAdapter = ListingAdapter()
+            adapter = listingAdapter
         }
-        observeLiveData()
     }
 
-    private fun observeLiveData(){
-        viewModel.gameList.observe(viewLifecycleOwner, Observer {gameList ->
-            gameList?.let {
-                // if gamelist not empty, make recyclerview visible
-                gameListRecyclerView.visibility = View.VISIBLE
-                listingAdapter.updateGameList(gameList)
+    private fun initViewModel() {
+        val viewModel  = ViewModelProvider(this).get(ListingViewModel::class.java)
+        lifecycleScope.launchWhenCreated {
+            viewModel.getListDataFromAPI().collectLatest {
+                listingAdapter.submitData(it)
             }
-        })
-        viewModel.gameListError.observe(viewLifecycleOwner, Observer { listingError->
-            listingError?.let {
-                // eğer error mesajı true ise
-                if(it){
-                    gameListError.visibility = View.VISIBLE
-                }else{
-                    gameListError.visibility = View.GONE
-                }
-            }
-        })
-
-        viewModel.gameListLoading.observe(viewLifecycleOwner, Observer { gamesLoading->
-            gamesLoading?.let {
-                if(it){
-                    gameListLoading.visibility = View.VISIBLE
-                    gameListRecyclerView.visibility = View.GONE
-                    gameListError.visibility = View.GONE
-                }else{
-                    gameListLoading.visibility = View.GONE
-
-                }
-            }
-
-        })
+        }
     }
+
+
 
 }
 

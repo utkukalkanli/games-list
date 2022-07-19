@@ -1,7 +1,7 @@
 package com.example.trendyol_internship.data.detail.service
 
 import com.example.trendyol_internship.data.detail.model.GameDetail
-import com.example.trendyol_internship.data.listing.service.ListAPI
+
 import com.example.trendyol_internship.util.Constants
 import io.reactivex.Single
 import retrofit2.Retrofit

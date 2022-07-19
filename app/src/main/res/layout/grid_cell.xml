@@ -3,19 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="game"
-            type="com.example.trendyol_internship.data.listing.model.Game" />
-        <variable
-            name="listener"
-            type="com.example.trendyol_internship.ui.listing.adapter.CardViewClickListener" />
-    </data>
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{listener::onCardViewClicked}"
         android:layout_margin="10dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="7dp"
@@ -32,14 +23,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:scaleType="fitXY"
-                android:downloadUrl="@{game.backgroundImage}" />
+                />
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/gameName"
                 android:layout_width="100dip"
                 android:layout_height="50dip"
                 android:layout_margin="10dp"
-                android:text="@{game.name}"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:lines="2"/>
@@ -49,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:text="@{String.valueOf(game.id)}">
+                >
             </TextView>
 
         </LinearLayout>

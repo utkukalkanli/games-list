@@ -10,17 +10,18 @@ import kotlin.collections.ArrayList
 // publishers
 // reddit url
 // website url
-data class Game(
-    @SerializedName("id")
+class Game(
+    //@SerializedName("id")
     val id: Int?,
 
-    @SerializedName("name")
+    //@SerializedName("name")
     val name: String?,
 
-    @SerializedName("background_image")
-    val backgroundImage: String?,
-
+    //@SerializedName("background_image")
+    val background_image: String?,
     )
+
+
 
 
 

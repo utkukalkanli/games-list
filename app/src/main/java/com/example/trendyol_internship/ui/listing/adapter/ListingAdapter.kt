@@ -3,64 +3,58 @@ package com.example.trendyol_internship.ui.listing.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.trendyol_internship.R
 import com.example.trendyol_internship.data.listing.model.Game
-import com.example.trendyol_internship.databinding.CardViewGameBinding
 import com.example.trendyol_internship.ui.listing.view.ListingFragmentDirections
-import com.example.trendyol_internship.util.downloadFromURL
-import com.example.trendyol_internship.util.placeholderProgressBar
-import kotlinx.android.synthetic.main.card_view_game.view.*
+import com.example.trendyol_internship.util.downloadImage
+import kotlinx.android.synthetic.main.grid_cell.view.*
 
-class ListingAdapter(val gameList: ArrayList<Game>): RecyclerView.Adapter<ListingAdapter.GameListViewHolder>(), CardViewClickListener {
 
-    // onCreateViewHolder'dan gelen view'ı parametre olarak alıp, RecyclerView.ViewHolder'a bu view'ı paslayacak
-    class GameListViewHolder(var view: CardViewGameBinding) : RecyclerView.ViewHolder(view.root){
+class ListingAdapter(): PagingDataAdapter<Game, ListingAdapter.MyViewHolder>(DiffUtilCallBack()), CardViewClickListener {
+
+    override fun onBindViewHolder(holder: ListingAdapter.MyViewHolder, position: Int) {
+        holder.bind(getItem(position)!!)
     }
 
-    // GameListViewHolder döndürüyor, grid_cell.xml layout ile adapter'ı birbirine bağlıyor
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameListViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val view = DataBindingUtil.inflate<CardViewGameBinding>(inflater,R.layout.card_view_game,parent,false)
-        return GameListViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListingAdapter.MyViewHolder {
+        val inflater = LayoutInflater.from(parent.context).inflate(R.layout.grid_cell, parent, false)
+        return MyViewHolder(inflater)
     }
 
-    // ViewHolder olustu, gameList array'i geldi, viewların değerlerini değiştiriyor
-    override fun onBindViewHolder(holder: GameListViewHolder, position: Int) {
-        holder.view.game = gameList[position]
-        holder.view.listener = this
-        /**
-        holder.view.name.text = gameList[position].name
-        holder.view.imageView.downloadFromURL(gameList[position].backgroundImage, placeholderProgressBar(holder.view.context))
-        holder.view.setOnClickListener{
-            val action = gameList[position].id?.let { it1 ->
-                ListingFragmentDirections.actionListingFragmentToDetailFragment(
-                    it1
-                )
-            }
-            if (action != null) {
-                Navigation.findNavController(it).navigate(action)
-            }
-        }*/
-    }
-    // kac tane row olusturacagını söylüyoruz
-    override fun getItemCount(): Int {
-        return gameList.size
+    class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
+
+        val imageView: ImageView = view.findViewById(R.id.imageView)
+        val tvName: TextView = view.findViewById(R.id.gameName)
+
+        fun bind(data: Game) {
+            tvName.text = data.name
+            // downloadImage(view = imageView, url = data.backgroundImage)
+            Glide.with(imageView)
+                .load(data.background_image)
+                .into(imageView)
+        }
     }
 
-    fun updateGameList(newGameList: List<Game>){
-        gameList.clear()
-        gameList.addAll(newGameList)
-        notifyDataSetChanged()
+    class DiffUtilCallBack : DiffUtil.ItemCallback<Game>() {
+        override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
+            return oldItem.name == newItem.name && oldItem.id == newItem.id && oldItem.background_image == newItem.background_image
+        }
     }
 
-    override fun onCardViewClicked(v: View) {
-        val gameid = v.gameID.text.toString().toInt()
-        println(gameid)
-        val action = ListingFragmentDirections.actionListingFragmentToDetailFragment(gameid)
-        Navigation.findNavController(v).navigate(action)
+    override fun onCardViewClicked(view: View) {
+        println(view.id)
     }
 
 }

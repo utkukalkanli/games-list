@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26831461588541666" />
         <entry key="app/src/main/res/layout/card_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/card_view_game.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/fragment_listing.xml" value="0.21455535888671878" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.29393115942028986" />

@@ -8,7 +8,7 @@ import com.example.trendyol_internship.R
 import com.example.trendyol_internship.data.detail.model.GameDetail
 import com.example.trendyol_internship.util.downloadFromURL
 import com.example.trendyol_internship.util.placeholderProgressBar
-import kotlinx.android.synthetic.main.card_view_game.view.*
+import kotlinx.android.synthetic.main.grid_cell.view.*
 
 
 class DetailAdapter(val gameDetail: GameDetail): RecyclerView.Adapter<DetailAdapter.GameDetailViewHolder>(){
@@ -22,7 +22,7 @@ class DetailAdapter(val gameDetail: GameDetail): RecyclerView.Adapter<DetailAdap
     }
 
     override fun onBindViewHolder(holder: GameDetailViewHolder, position: Int) {
-        holder.view.name.text = gameDetail.name
+        holder.view.gameName.text = gameDetail.name
         //holder.view.imageView.downloadFromURL(gameDetail.backgroundImage, placeholderProgressBar(holder.view.context))
     }
 
