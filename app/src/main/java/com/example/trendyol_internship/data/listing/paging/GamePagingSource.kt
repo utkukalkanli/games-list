@@ -16,7 +16,7 @@ class GamePagingSource(val apiService: RetroService):PagingSource<Int, Game>() {
 
     // gets called again and again when we refresh pages
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Game> {
-        val page = params.key ?: STARTING_PAGE_INDEX
+        val page = params.key ?: STARTING_PAGE_INDEX // ilk yükleme esnasında key null olacaktır, o zaman STARTING_PAGE_INDEX kullanıyoruz
         return try {
             val response = apiService.getGamesFromAPI(page)
             LoadResult.Page(
