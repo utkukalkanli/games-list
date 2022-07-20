@@ -1,4 +1,4 @@
-package com.example.trendyol_internship.data.listing.network
+package com.example.trendyol_internship.data.network
 
 import com.example.trendyol_internship.util.Constants
 import retrofit2.Retrofit
