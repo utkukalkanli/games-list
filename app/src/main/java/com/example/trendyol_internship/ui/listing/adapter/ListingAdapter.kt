@@ -18,7 +18,8 @@ class ListingAdapter(): PagingDataAdapter<Game, ListingAdapter.MyViewHolder>(Dif
 
     override fun onBindViewHolder(holder: ListingAdapter.MyViewHolder, position: Int) {
         // holder.view.imageView.downloadFromURL(gameDetail.backgroundImage, placeholderProgressBar(holder.view.context))
-        holder.bind(getItem(position)!!)
+        holder.bind(getItem(position)!!) // !! asserts that expresion is non-null
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListingAdapter.MyViewHolder {
@@ -37,6 +38,8 @@ class ListingAdapter(): PagingDataAdapter<Game, ListingAdapter.MyViewHolder>(Dif
             Glide.with(imageView)
                 .load(data.background_image)
                 .into(imageView)
+
+
         }
     }
 

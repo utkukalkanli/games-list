@@ -14,8 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:scaleType="fitCenter"
-        android:minHeight="200dp"
-        ></ImageView>
+        android:minHeight="200dp" />
 
     <TextView
         android:id="@+id/gameName"
