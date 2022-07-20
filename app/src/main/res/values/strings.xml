@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">trendyol-internship</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Games</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="listing_error_message">Error on listing games...</string>
-    <string name="name_place_holder">game name</string>
-    <string name="cover">game cover</string>
+    <string name="name_place_holder">Game Name</string>
+    <string name="cover">Game Cover</string>
     <string name="search_title">Search</string>
+    <string name="main_fragment_label">Games</string>
 </resources>

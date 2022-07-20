@@ -19,6 +19,9 @@
             android:name="id"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_listingFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -42,5 +45,9 @@
         <action
             android:id="@+id/action_searchFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <argument
+            android:name="keyword"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

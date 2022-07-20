@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.trendyol_internship.databinding.ActivityMainBinding
+import com.example.trendyol_internship.ui.listing.view.ListingFragment
 import com.example.trendyol_internship.ui.listing.view.ListingFragmentDirections
 
 
@@ -25,31 +26,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navigationController = Navigation.findNavController(this,R.id.fragment)
-        //navigationController = Navigation.findNavController(this,R.id.fragment) // toolbar'a backbutton koyuyor
-        binding.searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    println("KEY WORD: $query")
-                    binding.searchView.clearFocus()
-                    val bundle = bundleOf("keyword" to query)
-                    navigationController.navigate(R.id.searchFragment, bundle)
-                    return false
-                }
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    if (newText.equals("")){
-                        println("QUERY EMPTY !!!")
-                        navigationController.navigate(R.id.listingFragment)
-                    }
-                    return false
-                }
-
-            }
-        )
+        NavigationUI.setupActionBarWithNavController(this,navigationController) // this adds back button
     }
 
-
-
     // kullanıcı uygulama içerisinde baska bi tarafa giderse cagırılıyor
-
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navigationController, null)
     }
