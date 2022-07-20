@@ -2,18 +2,14 @@ package com.example.trendyol_internship.ui.listing.view
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.trendyol_internship.R
-import com.example.trendyol_internship.databinding.FragmentListingBinding
 import com.example.trendyol_internship.ui.listing.adapter.ListingAdapter
 import com.example.trendyol_internship.ui.listing.viewmodel.ListingViewModel
 import kotlinx.android.synthetic.main.fragment_listing.*
-import kotlinx.android.synthetic.main.search_toolbar.view.*
 import kotlinx.coroutines.flow.collectLatest
 
 
