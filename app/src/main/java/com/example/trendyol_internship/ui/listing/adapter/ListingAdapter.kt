@@ -11,36 +11,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.trendyol_internship.R
 import com.example.trendyol_internship.data.listing.model.Game
+import com.example.trendyol_internship.databinding.GridCellBinding
 
 
+class ListingAdapter(): PagingDataAdapter<Game, ListingAdapter.GridCellViewHolder>(DiffUtilCallBack()) {
 
-class ListingAdapter(): PagingDataAdapter<Game, ListingAdapter.MyViewHolder>(DiffUtilCallBack()) {
+    class GridCellViewHolder(val binding: GridCellBinding): RecyclerView.ViewHolder(binding.root)
 
-    override fun onBindViewHolder(holder: ListingAdapter.MyViewHolder, position: Int) {
-        // holder.view.imageView.downloadFromURL(gameDetail.backgroundImage, placeholderProgressBar(holder.view.context))
-        holder.bind(getItem(position)!!) // !! asserts that expresion is non-null
-
+    override fun onBindViewHolder(holder: ListingAdapter.GridCellViewHolder, position: Int) {
+        val game = getItem(position)!!
+        holder.binding.gameName.text = game.name
+        Glide.with(holder.binding.imageView).load(game.background_image).into(holder.binding.imageView)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListingAdapter.MyViewHolder {
-        val inflater = LayoutInflater.from(parent.context).inflate(R.layout.grid_cell, parent, false)
-        return MyViewHolder(inflater)
-    }
-
-    class MyViewHolder(view: View): RecyclerView.ViewHolder(view) {
-
-        val imageView: ImageView = view.findViewById(R.id.imageView)
-        val tvName: TextView = view.findViewById(R.id.gameName)
-
-
-        fun bind(data: Game) {
-            tvName.text = data.name
-            Glide.with(imageView)
-                .load(data.background_image)
-                .into(imageView)
-
-
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListingAdapter.GridCellViewHolder {
+        return GridCellViewHolder(GridCellBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     class DiffUtilCallBack : DiffUtil.ItemCallback<Game>() {

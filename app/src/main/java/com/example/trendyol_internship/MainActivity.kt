@@ -28,16 +28,20 @@ class MainActivity : AppCompatActivity() {
         //navigationController = Navigation.findNavController(this,R.id.fragment) // toolbar'a backbutton koyuyor
         binding.searchView.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    println(query)
+                    println("KEY WORD: $query")
                     binding.searchView.clearFocus()
                     val bundle = bundleOf("keyword" to query)
                     navigationController.navigate(R.id.searchFragment, bundle)
                     return false
                 }
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    println(newText)
+                    if (newText.equals("")){
+                        println("QUERY EMPTY !!!")
+                        navigationController.navigate(R.id.listingFragment)
+                    }
                     return false
                 }
+
             }
         )
     }
