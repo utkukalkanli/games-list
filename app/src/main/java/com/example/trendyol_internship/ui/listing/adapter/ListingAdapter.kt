@@ -2,12 +2,13 @@ package com.example.trendyol_internship.ui.listing.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.trendyol_internship.R
 import com.example.trendyol_internship.data.listing.model.Game
 import com.example.trendyol_internship.databinding.GridCellBinding
 import com.example.trendyol_internship.ui.listing.view.ListingFragmentDirections
@@ -24,7 +25,11 @@ class ListingAdapter :
         if (game != null) {
             holder.binding.gameName.text = game.name
             Glide.with(holder.binding.imageView).load(game.background_image)
+                .centerCrop()
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .error(R.drawable.ic_baseline_search_24)
                 .into(holder.binding.imageView)
+
             // set on click listener for card view
             holder.binding.cardView.setOnClickListener {
                 println("Game ID: " + game.id + "  Game Name: " + game.name)
@@ -48,6 +53,7 @@ class ListingAdapter :
         )
     }
 
+    // object that knows how to compare changes if items are same adapter wont render
     class DiffUtilCallBack : DiffUtil.ItemCallback<Game>() {
         override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
             return oldItem.id == newItem.id

@@ -16,10 +16,11 @@ import com.example.trendyol_internship.R
 import com.example.trendyol_internship.databinding.FragmentListingBinding
 import com.example.trendyol_internship.ui.listing.adapter.ListingAdapter
 import com.example.trendyol_internship.ui.listing.viewmodel.ListingViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_listing.*
 import kotlinx.coroutines.flow.collectLatest
 
-
+@AndroidEntryPoint
 class ListingFragment : Fragment() {
 
     private val viewModel by viewModels<ListingViewModel>()
@@ -60,15 +61,14 @@ class ListingFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 println("KEY WORD: $query")
                 binding.searchView.clearFocus()
-                val action = ListingFragmentDirections.actionListingFragmentToSearchFragment(query)
-                Navigation.findNavController(view).navigate(action)
+                viewModel.searchGames(query!!)
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.equals("")) {
                     println("QUERY EMPTY !!!")
-                    //navigationController.navigate(R.id.listingFragment)
+                    viewModel.searchGames("")
                 }
                 return false
             }
@@ -77,7 +77,7 @@ class ListingFragment : Fragment() {
     }
 
     private fun observeLiveData() {
-        viewModel.paginatedGameData.observe(viewLifecycleOwner, Observer {
+        viewModel.games.observe(viewLifecycleOwner, Observer {
             listingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         })
     }

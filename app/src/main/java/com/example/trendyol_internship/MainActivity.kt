@@ -14,8 +14,9 @@ import androidx.navigation.ui.NavigationUI
 import com.example.trendyol_internship.databinding.ActivityMainBinding
 import com.example.trendyol_internship.ui.listing.view.ListingFragment
 import com.example.trendyol_internship.ui.listing.view.ListingFragmentDirections
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navigationController: NavController
