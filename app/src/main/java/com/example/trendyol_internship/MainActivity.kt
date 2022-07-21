@@ -19,14 +19,17 @@ import com.example.trendyol_internship.ui.listing.view.ListingFragmentDirections
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navigationController: NavController
-    private lateinit var binding : ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        navigationController = Navigation.findNavController(this,R.id.fragment)
-        NavigationUI.setupActionBarWithNavController(this,navigationController) // this adds back button
+        navigationController = Navigation.findNavController(this, R.id.fragment)
+        NavigationUI.setupActionBarWithNavController(
+            this,
+            navigationController
+        ) // this adds back button
     }
 
     // kullanıcı uygulama içerisinde baska bi tarafa giderse cagırılıyor

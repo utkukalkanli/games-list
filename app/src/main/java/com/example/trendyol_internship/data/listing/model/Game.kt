@@ -13,7 +13,7 @@ class Game(
     val name: String?,
 
     val background_image: String?,
-    )
+)
 
 
 

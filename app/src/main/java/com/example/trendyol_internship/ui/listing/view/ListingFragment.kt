@@ -6,6 +6,7 @@ import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -21,9 +22,16 @@ import kotlinx.coroutines.flow.collectLatest
 
 class ListingFragment : Fragment() {
 
+    private val viewModel by viewModels<ListingViewModel>()
     private var listingAdapter = ListingAdapter()
+
+    /**
+     * When we use view binding in the fragment we have to pay special attention because the view of a fragment can be destroyed while the
+     * fragment itself is still in memory. If this is the case we have to null out our binding variable otherwise it will keep
+     * unnecessary reference to the whole view hierarchy which is a memory leak.
+     */
     private var _binding: FragmentListingBinding? = null
-    private lateinit var navigationController: NavController
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -34,7 +42,6 @@ class ListingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as AppCompatActivity).supportActionBar?.title = "Games"
-        (activity as AppCompatActivity).actionBar?.title = "Games"
         // Inflate the layout for this fragment
         _binding = FragmentListingBinding.inflate(inflater, container, false)
         return binding.root
@@ -44,13 +51,12 @@ class ListingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // fragment'ımıza viewmodel bağlıyoruz
         initRecyclerView()
-        initViewModel()
+        observeLiveData()
         setupCustomBar(view)
-        //observeLiveData()
     }
 
-    private fun setupCustomBar(view: View){
-        binding.searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+    private fun setupCustomBar(view: View) {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 println("KEY WORD: $query")
                 binding.searchView.clearFocus()
@@ -58,8 +64,9 @@ class ListingFragment : Fragment() {
                 Navigation.findNavController(view).navigate(action)
                 return false
             }
+
             override fun onQueryTextChange(newText: String?): Boolean {
-                if (newText.equals("")){
+                if (newText.equals("")) {
                     println("QUERY EMPTY !!!")
                     //navigationController.navigate(R.id.listingFragment)
                 }
@@ -69,25 +76,18 @@ class ListingFragment : Fragment() {
         )
     }
 
-    private fun observeLiveData(){
-        println("ooooooo")
+    private fun observeLiveData() {
+        viewModel.paginatedGameData.observe(viewLifecycleOwner, Observer {
+            listingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+        })
     }
 
     private fun initRecyclerView() {
         gameListRecyclerView.apply {
-            layoutManager = GridLayoutManager(context,2)
-            val decoration  = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            layoutManager = GridLayoutManager(context, 2)
+            val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
             addItemDecoration(decoration)
             adapter = listingAdapter
-        }
-    }
-
-    private fun initViewModel() {
-        val viewModel  = ViewModelProvider(this)[ListingViewModel::class.java]
-        lifecycleScope.launchWhenCreated {
-            viewModel.getListDataFromAPI().collectLatest {
-                listingAdapter.submitData(it)
-            }
         }
     }
 
@@ -95,7 +95,6 @@ class ListingFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 
 
 }

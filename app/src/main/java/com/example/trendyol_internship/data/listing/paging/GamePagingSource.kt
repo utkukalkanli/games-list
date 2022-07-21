@@ -5,7 +5,7 @@ import androidx.paging.PagingState
 import com.example.trendyol_internship.data.listing.model.Game
 import com.example.trendyol_internship.data.network.NetworkService
 
-class GamePagingSource(private val apiService: NetworkService):PagingSource<Int, Game>() {
+class GamePagingSource(private val apiService: NetworkService) : PagingSource<Int, Game>() {
 
     override fun getRefreshKey(state: PagingState<Int, Game>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -16,7 +16,9 @@ class GamePagingSource(private val apiService: NetworkService):PagingSource<Int,
 
     // gets called again and again when we refresh pages
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Game> {
-        val page = params.key ?: STARTING_PAGE_INDEX // ilk yükleme esnasında key null olacaktır, o zaman STARTING_PAGE_INDEX kullanıyoruz
+        // we use elvis operator since params.key is null at the beginning
+        val page = params.key
+            ?: STARTING_PAGE_INDEX // ilk yükleme esnasında key null olacaktır, o zaman STARTING_PAGE_INDEX kullanıyoruz
         return try {
             val response = apiService.getGamesFromAPI(page)
             LoadResult.Page(
@@ -28,6 +30,7 @@ class GamePagingSource(private val apiService: NetworkService):PagingSource<Int,
             return LoadResult.Error(exception)
         }
     }
+
     companion object {
         private const val STARTING_PAGE_INDEX = 1
     }
