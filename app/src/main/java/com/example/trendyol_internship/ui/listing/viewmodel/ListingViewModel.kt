@@ -26,6 +26,5 @@ class ListingViewModel @Inject constructor(repository: ListingRepository) : View
 
     companion object {
         private const val DEFAULT_QUERY = ""
-
     }
 }
