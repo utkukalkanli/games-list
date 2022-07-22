@@ -32,9 +32,7 @@ class ListingAdapter :
 
             // set on click listener for card view
             holder.binding.cardView.setOnClickListener {
-                println("Game ID: " + game.id + "  Game Name: " + game.name)
-                val action =
-                    ListingFragmentDirections.actionListingFragmentToDetailFragment(game.id!!)
+                val action = ListingFragmentDirections.actionListingFragmentToDetailFragment(game.id!!)
                 Navigation.findNavController(it).navigate(action)
             }
         } else {

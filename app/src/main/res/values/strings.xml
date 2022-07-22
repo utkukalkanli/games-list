@@ -7,4 +7,6 @@
     <string name="cover">Game Cover</string>
     <string name="search_title">Search</string>
     <string name="main_fragment_label">Games</string>
+    <string name="text_view_error">Results could not be loaded</string>
+    <string name="load_state_retry_button">Retry</string>
 </resources>

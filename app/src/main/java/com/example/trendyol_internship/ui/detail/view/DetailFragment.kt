@@ -19,6 +19,8 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        //println("Game ID: " + game.id + "  Game Name: " + game.name)
         return inflater.inflate(R.layout.fragment_detail, container, false)
     }
 

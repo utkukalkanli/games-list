@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.trendyol_internship.R
@@ -18,13 +17,13 @@ import com.example.trendyol_internship.ui.listing.adapter.ListingAdapter
 import com.example.trendyol_internship.ui.listing.viewmodel.ListingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_listing.*
-import kotlinx.coroutines.flow.collectLatest
+
 
 @AndroidEntryPoint
 class ListingFragment : Fragment() {
 
     private val viewModel by viewModels<ListingViewModel>()
-    private var listingAdapter = ListingAdapter()
+    private val listingAdapter = ListingAdapter()
 
     /**
      * When we use view binding in the fragment we have to pay special attention because the view of a fragment can be destroyed while the
@@ -42,7 +41,6 @@ class ListingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AppCompatActivity).supportActionBar?.title = "Games"
         // Inflate the layout for this fragment
         _binding = FragmentListingBinding.inflate(inflater, container, false)
         return binding.root
@@ -50,30 +48,57 @@ class ListingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // fragment'ımıza viewmodel bağlıyoruz
         initRecyclerView()
         observeLiveData()
-        setupCustomBar(view)
+        initializeLoadStateListener()
+        setHasOptionsMenu(true)
     }
 
-    private fun setupCustomBar(view: View) {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                println("KEY WORD: $query")
-                binding.searchView.clearFocus()
-                viewModel.searchGames(query!!)
-                return false
-            }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.search_menu,menu)
 
+        val searchItem = menu.findItem(R.id.search_item)
+        val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null){
+                    viewModel.searchGames(query)
+                    binding.gameListRecyclerView.scrollToPosition(0)
+                    searchView.clearFocus()
+                }
+
+                return true
+            }
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.equals("")) {
-                    println("QUERY EMPTY !!!")
                     viewModel.searchGames("")
+                    searchView.clearFocus()
                 }
-                return false
+                return true
+            }
+        })
+
+    }
+
+    private fun initializeLoadStateListener() {
+        listingAdapter.addLoadStateListener { loadState ->
+            binding.apply {
+                progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+                gameListRecyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+                buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
+                textViewError.isVisible = loadState.source.refresh is LoadState.Error
+
+                // for the empty view
+                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && listingAdapter.itemCount < 1){
+                    gameListRecyclerView.isVisible = false
+                    textViewEmpty.isVisible = true
+                }
+                else{
+                    textViewEmpty.isVisible = false
+                }
             }
         }
-        )
     }
 
     private fun observeLiveData() {
@@ -84,10 +109,16 @@ class ListingFragment : Fragment() {
 
     private fun initRecyclerView() {
         gameListRecyclerView.apply {
+            itemAnimator = null // recyclerview datası her degistiginde diffutil compare ederken eski dataset flashlıyor ve cok cirkin görünüyor, bu recyclerview animasyonlarını kapatarak bunun önüne geçiyor
             layoutManager = GridLayoutManager(context, 2)
             val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
             addItemDecoration(decoration)
             adapter = listingAdapter
+            gameListRecyclerView.adapter.apply {  }
+            /**
+            binding.buttonRetry.setOnClickListener(
+                // adapter.retry()
+            )*/
         }
     }
 

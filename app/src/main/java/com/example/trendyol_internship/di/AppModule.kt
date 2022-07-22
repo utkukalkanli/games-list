@@ -25,7 +25,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideListingAPI(retrofit: Retrofit): NetworkService =
+    fun provideRetrofitAPI(retrofit: Retrofit): NetworkService =
         retrofit.create(NetworkService::class.java)
 
 }

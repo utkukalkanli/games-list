@@ -1,9 +1,6 @@
 package com.example.trendyol_internship.ui.listing.viewmodel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.switchMap
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.paging.*
 import com.example.trendyol_internship.data.listing.repository.ListingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,6 +10,9 @@ import javax.inject.Inject
 class ListingViewModel @Inject constructor(repository: ListingRepository) : ViewModel() {
 
     private val currentQuery = MutableLiveData(DEFAULT_QUERY)
+
+    private val _displayCheckBox = MutableLiveData<Boolean>(true)
+    val displayCheckBox : LiveData<Boolean> = _displayCheckBox
 
     /** we swap the value of games when the currentQuery changes, switchMap method takes lambda parameter
      *  that will be executed whenever the value of currentQuery livedata changes, when this happens we get passed
@@ -26,7 +26,13 @@ class ListingViewModel @Inject constructor(repository: ListingRepository) : View
         currentQuery.value = query
     }
 
+    fun switchCheckBox() {
+        _displayCheckBox.value?.let {
+            _displayCheckBox.value = !it
+        }
+    }
     companion object {
         private const val DEFAULT_QUERY = ""
+
     }
 }
