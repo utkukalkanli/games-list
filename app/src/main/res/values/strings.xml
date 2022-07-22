@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">trendyol-internship</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="app_name">Games</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="listing_error_message">Error on listing games...</string>
+    <string name="no_results_found_text">No results found for this query</string>
+    <string name="name_place_holder">Game Name</string>
+    <string name="cover">Game Cover</string>
+    <string name="search_title">Search</string>
+    <string name="main_fragment_label">Games</string>
+    <string name="text_view_error">Results could not be loaded</string>
+    <string name="load_state_retry_button">Retry</string>
 </resources>

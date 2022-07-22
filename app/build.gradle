@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -18,10 +19,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    dataBinding{
-        enabled = true
+    buildFeatures{
+        viewBinding true
+        dataBinding true
     }
-    buildTypes {
+    buildTypes {z
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -41,12 +43,12 @@ dependencies {
     def lifeCycleExtensionVersion = '1.1.1'
     def supportVersion = '28.0.0'
     def retrofitVersion = '2.9.0'
-    def glideVersion = '4.10.0'
+    def glideVersion = '4.12.0'
     def rxJavaVersion = '2.1.1'
     def roomVersion = '2.4.2'
     def navVersion = '2.2.1'
     def preferencesVersion = '1.2.0'
-
+    def hiltAndroidXVersion = '1.0.0-alpha02'
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
@@ -85,5 +87,14 @@ dependencies {
     //implementation "com.android.support:palette-v7:$supportVersion"
     //implementation "com.android.support:design:$supportVersion"
 
+    // paging dependencies
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
+    implementation 'androidx.paging:paging-runtime:3.2.0-alpha01'
+
     implementation "androidx.preference:preference:$preferencesVersion"
+
+    // Dagger Hilt
+    implementation "com.google.dagger:hilt-android:2.42"
+    kapt "com.google.dagger:hilt-compiler:2.42"
 }
