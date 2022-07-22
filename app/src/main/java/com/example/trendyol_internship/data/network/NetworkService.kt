@@ -1,5 +1,6 @@
 package com.example.trendyol_internship.data.network
 
+import com.example.trendyol_internship.data.detail.model.GameDetail
 import com.example.trendyol_internship.util.Constants
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,8 +18,8 @@ interface NetworkService {
         @Query("search") search: String
     ): ApiResponse
 
-    @GET("games/{id}" + Constants.API_KEY)
+    @GET("games/{GAME_ID}" + Constants.API_KEY)
     suspend fun getGameDetailFromAPI(
-        @Path("id") id: Int
-    ): ApiDetailResponse
+        @Path("GAME_ID") game_id: Int
+    ): GameDetail
 }

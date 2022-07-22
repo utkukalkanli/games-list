@@ -2,7 +2,6 @@ package com.example.trendyol_internship.ui.listing.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -41,7 +40,6 @@ class ListingAdapter(private val listener: OnItemClickListener) :
                 .error(R.drawable.ic_baseline_search_24)
                 .into(holder.binding.imageView)
         } else {
-            //Toast.makeText(this@ListingAdapter, "Can not load data...",Toast.LENGTH_SHORT).show()
             println("Game=Null on ListingAdapter !!!")
         }
     }

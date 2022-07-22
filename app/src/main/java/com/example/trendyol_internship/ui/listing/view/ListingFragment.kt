@@ -112,7 +112,7 @@ class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
     private fun initRecyclerView() {
         gameListRecyclerView.apply {
             itemAnimator =
-                null // recyclerview datası her degistiginde diffutil compare ederken eski dataset flashlıyor ve cok cirkin görünüyor, bu recyclerview animasyonlarını kapatarak bunun önüne geçiyor
+                null // recyclerview data's her degistiginde diffutil compare ederken eski dataset flashlıyor ve cok cirkin görünüyor, bu recyclerview animasyonlarını kapatarak bunun önüne geçiyor
             layoutManager = GridLayoutManager(context, 2)
             val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
             addItemDecoration(decoration)

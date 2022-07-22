@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ListingViewModel @Inject constructor(repository: ListingRepository) : ViewModel() {
+class ListingViewModel @Inject constructor(private val repository: ListingRepository) : ViewModel() {
 
     private val currentQuery = MutableLiveData(DEFAULT_QUERY)
 
