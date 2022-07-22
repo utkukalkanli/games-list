@@ -7,9 +7,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ListingRepository @Inject constructor(private val retroService : NetworkService) {
+class ListingRepository @Inject constructor(private val retroService: NetworkService) {
 
-    fun getListDataFromAPIWithLiveData(query : String) = Pager(
+    fun getListDataFromAPIWithLiveData(query: String) = Pager(
         config = PagingConfig(pageSize = 20, maxSize = 100),
         pagingSourceFactory = { GamePagingSource(retroService, query) }
     ).liveData

@@ -11,16 +11,27 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.trendyol_internship.R
 import com.example.trendyol_internship.data.listing.model.Game
 import com.example.trendyol_internship.databinding.GridCellBinding
-import com.example.trendyol_internship.ui.listing.view.ListingFragmentDirections
 
-
-class ListingAdapter :
+class ListingAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<Game, ListingAdapter.GridCellViewHolder>(DiffUtilCallBack()) {
 
-    class GridCellViewHolder(val binding: GridCellBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class GridCellViewHolder(val binding: GridCellBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        // set on click listener for card view
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    if (item != null) {
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
+    }
 
     override fun onBindViewHolder(holder: GridCellViewHolder, position: Int) {
-
         val game = getItem(position)
         if (game != null) {
             holder.binding.gameName.text = game.name
@@ -29,12 +40,6 @@ class ListingAdapter :
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .error(R.drawable.ic_baseline_search_24)
                 .into(holder.binding.imageView)
-
-            // set on click listener for card view
-            holder.binding.cardView.setOnClickListener {
-                val action = ListingFragmentDirections.actionListingFragmentToDetailFragment(game.id!!)
-                Navigation.findNavController(it).navigate(action)
-            }
         } else {
             //Toast.makeText(this@ListingAdapter, "Can not load data...",Toast.LENGTH_SHORT).show()
             println("Game=Null on ListingAdapter !!!")
@@ -60,5 +65,9 @@ class ListingAdapter :
         override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
             return oldItem.name == newItem.name && oldItem.id == newItem.id && oldItem.background_image == newItem.background_image
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(game: Game)
     }
 }

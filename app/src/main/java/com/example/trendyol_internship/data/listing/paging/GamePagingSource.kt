@@ -10,8 +10,8 @@ private const val STARTING_PAGE_INDEX = 1
 
 class GamePagingSource(
     private val apiService: NetworkService,
-    private val query : String
-    ) : PagingSource<Int, Game>() {
+    private val query: String
+) : PagingSource<Int, Game>() {
 
     override fun getRefreshKey(state: PagingState<Int, Game>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -27,11 +27,10 @@ class GamePagingSource(
             ?: STARTING_PAGE_INDEX // ilk yükleme esnasında key null olacaktır, o zaman STARTING_PAGE_INDEX kullanıyoruz
         return try {
             var response = ApiResponse(arrayListOf())
-            if (query.isEmpty()){
+            if (query.isEmpty()) {
                 response = apiService.getGamesFromAPI(page)
-            }
-            else if (query.isNotEmpty()){
-                response = apiService.getSearchResultFromAPI(page,query)
+            } else if (query.isNotEmpty()) {
+                response = apiService.getSearchResultFromAPI(page, query)
             }
             LoadResult.Page(
                 data = response.results,

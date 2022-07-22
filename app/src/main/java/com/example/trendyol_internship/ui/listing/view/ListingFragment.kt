@@ -8,10 +8,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.trendyol_internship.R
+import com.example.trendyol_internship.data.listing.model.Game
 import com.example.trendyol_internship.databinding.FragmentListingBinding
 import com.example.trendyol_internship.ui.listing.adapter.ListingAdapter
 import com.example.trendyol_internship.ui.listing.viewmodel.ListingViewModel
@@ -20,10 +22,10 @@ import kotlinx.android.synthetic.main.fragment_listing.*
 
 
 @AndroidEntryPoint
-class ListingFragment : Fragment() {
+class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
 
     private val viewModel by viewModels<ListingViewModel>()
-    private val listingAdapter = ListingAdapter()
+    private val listingAdapter = ListingAdapter(this)
 
     /**
      * When we use view binding in the fragment we have to pay special attention because the view of a fragment can be destroyed while the
@@ -56,13 +58,14 @@ class ListingFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.search_menu,menu)
+        inflater.inflate(R.menu.search_menu, menu)
 
         val searchItem = menu.findItem(R.id.search_item)
         val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
-        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null){
+                if (query != null) {
                     viewModel.searchGames(query)
                     binding.gameListRecyclerView.scrollToPosition(0)
                     searchView.clearFocus()
@@ -70,6 +73,7 @@ class ListingFragment : Fragment() {
 
                 return true
             }
+
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.equals("")) {
                     viewModel.searchGames("")
@@ -78,7 +82,6 @@ class ListingFragment : Fragment() {
                 return true
             }
         })
-
     }
 
     private fun initializeLoadStateListener() {
@@ -90,11 +93,10 @@ class ListingFragment : Fragment() {
                 textViewError.isVisible = loadState.source.refresh is LoadState.Error
 
                 // for the empty view
-                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && listingAdapter.itemCount < 1){
+                if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && listingAdapter.itemCount < 1) {
                     gameListRecyclerView.isVisible = false
                     textViewEmpty.isVisible = true
-                }
-                else{
+                } else {
                     textViewEmpty.isVisible = false
                 }
             }
@@ -109,15 +111,16 @@ class ListingFragment : Fragment() {
 
     private fun initRecyclerView() {
         gameListRecyclerView.apply {
-            itemAnimator = null // recyclerview datası her degistiginde diffutil compare ederken eski dataset flashlıyor ve cok cirkin görünüyor, bu recyclerview animasyonlarını kapatarak bunun önüne geçiyor
+            itemAnimator =
+                null // recyclerview datası her degistiginde diffutil compare ederken eski dataset flashlıyor ve cok cirkin görünüyor, bu recyclerview animasyonlarını kapatarak bunun önüne geçiyor
             layoutManager = GridLayoutManager(context, 2)
             val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
             addItemDecoration(decoration)
             adapter = listingAdapter
-            gameListRecyclerView.adapter.apply {  }
+            gameListRecyclerView.adapter.apply { }
             /**
             binding.buttonRetry.setOnClickListener(
-                // adapter.retry()
+            // adapter.retry()
             )*/
         }
     }
@@ -125,6 +128,17 @@ class ListingFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(game: Game) {
+        val action = game.id?.let {
+            ListingFragmentDirections.actionListingFragmentToDetailFragment(
+                it
+            )
+        }
+        if (action != null) {
+            findNavController().navigate(action)
+        }
     }
 
 
