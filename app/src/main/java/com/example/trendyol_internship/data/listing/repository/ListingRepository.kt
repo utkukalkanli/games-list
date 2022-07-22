@@ -12,6 +12,6 @@ class ListingRepository @Inject constructor(private val retroService: NetworkSer
     fun getListDataFromAPIWithLiveData(query: String) = Pager(
         config = PagingConfig(pageSize = 20, maxSize = 100),
         pagingSourceFactory = { GamePagingSource(retroService, query) }
-    ).liveData
+    )
 
 }

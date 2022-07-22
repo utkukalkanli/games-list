@@ -17,7 +17,7 @@ class ListingViewModel @Inject constructor(repository: ListingRepository) : View
      *  also, we need to add .cachedIn otherwise we get crashed when we rotate the device because we cant load from the same paging data twice
      */
     val games = currentQuery.switchMap { queryString ->
-        repository.getListDataFromAPIWithLiveData(queryString).cachedIn(viewModelScope)
+        repository.getListDataFromAPIWithLiveData(queryString).liveData.cachedIn(viewModelScope)
     }
 
     fun searchGames(query: String) {
