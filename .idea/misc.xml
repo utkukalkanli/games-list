@@ -4,13 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.145" />
+        <entry key="app/src/main/res/drawable/back.xml" value="0.189" />
+        <entry key="app/src/main/res/drawable/back_red.xml" value="0.162" />
+        <entry key="app/src/main/res/drawable/back_yellow.xml" value="0.162" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1515" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22371978759765626" />
         <entry key="app/src/main/res/layout/card_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/card_view_game.xml" value="0.1" />
         <entry key="app/src/main/res/layout/detail_fragment.xml" value="0.2947916666666667" />
-        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.2272445678710937" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.20126926563916592" />
         <entry key="app/src/main/res/layout/fragment_listing.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.24377746582031254" />
         <entry key="app/src/main/res/layout/fragment_wishlist.xml" value="0.21822916666666667" />

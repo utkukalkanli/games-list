@@ -11,4 +11,6 @@
     <string name="main_fragment_label">Games</string>
     <string name="text_view_error">Results could not be loaded</string>
     <string name="load_state_retry_button">Retry</string>
+    <string name="visit_reddit_text">Visit reddit</string>
+    <string name="visit_website_text">Visit website</string>
 </resources>

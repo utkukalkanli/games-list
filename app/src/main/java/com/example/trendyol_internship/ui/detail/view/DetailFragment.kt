@@ -1,6 +1,8 @@
 package com.example.trendyol_internship.ui.detail.view
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
@@ -41,13 +43,26 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentDetailBinding.bind(view)
-        binding.cardViewDescription.setOnClickListener {
-            if (gameDescription.lineCount == 4){
-                gameDescription.setLines(20)
+
+        binding.scrollView.scrollViewLinearLayout.cardViewDescription.setOnClickListener{
+            println("description")
+            if (cardViewDescription.gameDescription.lineCount == 4){
+                println("girdi")
+                cardViewDescription.gameDescription.setLines(20)
             }
             else{
-                gameDescription.setLines(4)
+                println("girdi2")
+                println(cardViewDescription.gameDescription.lineCount)
+                cardViewDescription.gameDescription.setLines(4)
             }
+        }
+        binding.scrollView.scrollViewLinearLayout.cardViewVisitReddit.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.gameDetail.value?.redditURL))
+            startActivity(browserIntent)
+        }
+        binding.scrollView.scrollViewLinearLayout.cardViewVisitWebsite.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.gameDetail.value?.websiteURL))
+            startActivity(browserIntent)
         }
         observeLiveData()
 
@@ -81,23 +96,37 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 // edit metacritic
                 val metaCritic : Int = viewModel.gameDetail.value!!.metaCritic ?: -1
                 binding.detailMetaCriticScore.text = metaCritic.toString()
-                if (metaCritic != null){
-                    if (metaCritic in (75..100)){
-                        binding.detailMetaCriticScore.setTextColor(Color.GREEN)
-                    }
-                    else if (metaCritic in (50..74)){
-                        binding.detailMetaCriticScore.setTextColor(Color.YELLOW)
-                    }
-                    else if (metaCritic in (0..49)){
-                        binding.detailMetaCriticScore.setTextColor(Color.RED)
-                    }
-                    else{
-                        binding.detailMetaCriticScore.visibility = View.GONE
-                    }
+                if (metaCritic in (75..100)){
+                    binding.detailMetaCriticScore.setTextColor(Color.GREEN)
+                    binding.detailMetaCriticScore.setBackgroundResource(R.drawable.back_green)
+                }
+                else if (metaCritic in (50..74)){
+                    binding.detailMetaCriticScore.setTextColor(Color.YELLOW)
+                    binding.detailMetaCriticScore.setBackgroundResource(R.drawable.back_yellow)
+                }
+                else if (metaCritic in (0..49)){
+                    binding.detailMetaCriticScore.setTextColor(Color.RED)
+                    binding.detailMetaCriticScore.setBackgroundResource(R.drawable.back_red)
+                }
+                else{
+                    binding.detailMetaCriticScore.visibility = View.GONE
                 }
 
                 // edit game description
                 binding.gameDescription.text = viewModel.gameDetail.value?.descriptionRaw
+
+                // information
+                binding.gameInformation.text = viewModel.gameDetail.value?.releaseDate.toString()
+
+
+
+                // URL setup
+                if (viewModel.gameDetail.value?.redditURL?.isEmpty() == true){
+                    binding.cardViewVisitReddit.visibility = View.GONE
+                }
+                if (viewModel.gameDetail.value?.websiteURL?.isEmpty() == true){
+                    binding.cardViewVisitWebsite.visibility = View.GONE
+                }
 
             }
 
@@ -121,7 +150,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     fun expandDescription(view: View) {
-        binding.cardViewDescription.gameDescription.setLines(10)
+        //binding.cardViewDescription.gameDescription.setLines(10)
     }
 
 
