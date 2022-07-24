@@ -119,7 +119,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewInformation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:layout_margin="6dp"
                 android:focusable="false"
                 app:cardCornerRadius="20dp"
@@ -148,17 +148,62 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/gameInformation"
+                        android:id="@+id/releaseDate"
+                        android:background="@drawable/dashed_underline"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="0dp"
                         android:layout_marginEnd="10dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="0dp"
                         android:ellipsize="end"
-                        android:lines="4"
+                        android:lines="1"
                         android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/genres"
+                        android:background="@drawable/dashed_underline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/playtime"
+                        android:background="@drawable/dashed_underline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/publishers"
+                        android:background="@drawable/dashed_underline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="0dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

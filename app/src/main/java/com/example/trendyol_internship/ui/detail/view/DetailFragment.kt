@@ -75,12 +75,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             println("Name: ${viewModel.gameDetail.value?.name}")
             println("DescriptionRaw: ${viewModel.gameDetail.value?.descriptionRaw}")
             println("Metacritic: ${viewModel.gameDetail.value?.metaCritic}")
-            if (viewModel.gameDetail.value?.genres?.size!! > 0){
-                println("Genres: ${viewModel.gameDetail.value?.genres?.get(0)?.name}")
-            }
-            if (viewModel.gameDetail.value?.publishers?.size!! > 0){
-                println("Publishers: ${viewModel.gameDetail.value?.publishers?.get(0)?.name}")
-            }
             binding.apply {
 
                 // render image
@@ -116,9 +110,29 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 binding.gameDescription.text = viewModel.gameDetail.value?.descriptionRaw
 
                 // information
-                binding.gameInformation.text = viewModel.gameDetail.value?.releaseDate.toString()
+                binding.cardViewInformation.releaseDate.text = "Release Date: " + viewModel.gameDetail.value?.releaseDate.toString()
+                binding.cardViewInformation.playtime.text = "Playtime: " + viewModel.gameDetail.value?.playTime.toString() + " hours"
 
+                if (viewModel.gameDetail.value?.genres?.size!! > 0){
+                    var genresText = ""
+                    for (genre in viewModel.gameDetail.value!!.genres!!){
+                        println(genre.name)
+                        genresText += genre.name + ", "
+                    }
+                    binding.cardViewInformation.genres.text = "Genres: ${genresText.dropLast(2)}"
+                }else{
+                    binding.cardViewInformation.genres.visibility = View.GONE
+                }
 
+                if (viewModel.gameDetail.value?.publishers?.size!! > 0){
+                    var publishersText = ""
+                    for (publisher in viewModel.gameDetail.value!!.publishers!!){
+                        publishersText += publisher.name + ", "
+                    }
+                    binding.cardViewInformation.publishers.text = "Publishers: ${publishersText.dropLast(2)}"
+                }else{
+                    binding.cardViewInformation.publishers.visibility = View.GONE
+                }
 
                 // URL setup
                 if (viewModel.gameDetail.value?.redditURL?.isEmpty() == true){
