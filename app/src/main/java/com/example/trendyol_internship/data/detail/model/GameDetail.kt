@@ -31,13 +31,13 @@ class GameDetail(
     val releaseDate: Date?,
 
     @SerializedName("genres")
-    val genres: ArrayList<Objects>?,
+    val genres: ArrayList<Genre>?,
 
     @SerializedName("playtime")
     val playTime: Int?,
 
     @SerializedName("publishers")
-    val publishers: ArrayList<Objects>?,
+    val publishers: ArrayList<Publisher>?,
 
     @SerializedName("reddit_url")
     val redditURL: String?,

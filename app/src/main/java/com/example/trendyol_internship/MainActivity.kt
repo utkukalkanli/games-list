@@ -3,6 +3,7 @@ package com.example.trendyol_internship
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 //import androidx.appcompat.widget.SearchView
 import android.widget.SearchView
 import androidx.appcompat.widget.Toolbar
@@ -37,5 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navigationController, null)
     }
+
+
 
 }

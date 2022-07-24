@@ -8,19 +8,17 @@ import com.example.trendyol_internship.data.detail.repository.DetailRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.reflect.typeOf
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(private val repository: DetailRepository) : ViewModel() {
 
-    private val gameDetail: MutableLiveData<GameDetail> = MutableLiveData()
+    var gameDetail: MutableLiveData<GameDetail> = MutableLiveData()
 
-    fun getGameDetail(id: Int): GameDetail? {
+    fun updateGameDetail(id: Int) {
         viewModelScope.launch {
             val response = repository.getGameDetailAPIResponse(id)
-            println("VIEWMODEL ${response.name}")
             gameDetail.value = response
         }
-        return gameDetail.value
     }
-
 }
