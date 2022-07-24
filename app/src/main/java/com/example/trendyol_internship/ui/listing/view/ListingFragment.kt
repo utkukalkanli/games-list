@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.trendyol_internship.MainActivity
 import com.example.trendyol_internship.R
 import com.example.trendyol_internship.data.listing.model.Game
 import com.example.trendyol_internship.databinding.FragmentListingBinding
@@ -44,6 +45,7 @@ class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+
         _binding = FragmentListingBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -71,7 +73,6 @@ class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
                     binding.gameListRecyclerView.scrollToPosition(0)
                     searchView.clearFocus()
                 }
-
                 return true
             }
 

@@ -44,24 +44,22 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentDetailBinding.bind(view)
 
-        binding.scrollView.scrollViewLinearLayout.cardViewDescription.setOnClickListener{
-            println("description")
-            if (cardViewDescription.gameDescription.lineCount == 4){
-                println("girdi")
+        binding.scrollView.scrollViewLinearLayout.cardViewDescription.setOnClickListener {
+            if (cardViewDescription.gameDescription.lineCount == 4) {
                 cardViewDescription.gameDescription.setLines(20)
-            }
-            else{
-                println("girdi2")
+            } else {
                 println(cardViewDescription.gameDescription.lineCount)
                 cardViewDescription.gameDescription.setLines(4)
             }
         }
         binding.scrollView.scrollViewLinearLayout.cardViewVisitReddit.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.gameDetail.value?.redditURL))
+            val browserIntent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.gameDetail.value?.redditURL))
             startActivity(browserIntent)
         }
         binding.scrollView.scrollViewLinearLayout.cardViewVisitWebsite.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.gameDetail.value?.websiteURL))
+            val browserIntent =
+                Intent(Intent.ACTION_VIEW, Uri.parse(viewModel.gameDetail.value?.websiteURL))
             startActivity(browserIntent)
         }
         observeLiveData()
@@ -72,37 +70,29 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         val gameID: Int = args.id
         viewModel.updateGameDetail(gameID)
         viewModel.gameDetail.observe(viewLifecycleOwner, Observer {
-            println("Name: ${viewModel.gameDetail.value?.name}")
-            println("DescriptionRaw: ${viewModel.gameDetail.value?.descriptionRaw}")
-            println("Metacritic: ${viewModel.gameDetail.value?.metaCritic}")
             binding.apply {
-
                 // render image
-                Glide.with(binding.detailImageView).load(viewModel.gameDetail.value?.backgroundImage)
+                Glide.with(binding.detailImageView)
+                    .load(viewModel.gameDetail.value?.backgroundImage)
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_baseline_search_24)
                     .into(binding.detailImageView)
-
                 // edit game name
                 binding.detailGameName.text = viewModel.gameDetail.value?.name
-
                 // edit metacritic
-                val metaCritic : Int = viewModel.gameDetail.value!!.metaCritic ?: -1
+                val metaCritic: Int = viewModel.gameDetail.value!!.metaCritic ?: -1
                 binding.detailMetaCriticScore.text = metaCritic.toString()
-                if (metaCritic in (75..100)){
+                if (metaCritic in (75..100)) {
                     binding.detailMetaCriticScore.setTextColor(Color.GREEN)
                     binding.detailMetaCriticScore.setBackgroundResource(R.drawable.back_green)
-                }
-                else if (metaCritic in (50..74)){
+                } else if (metaCritic in (50..74)) {
                     binding.detailMetaCriticScore.setTextColor(Color.YELLOW)
                     binding.detailMetaCriticScore.setBackgroundResource(R.drawable.back_yellow)
-                }
-                else if (metaCritic in (0..49)){
+                } else if (metaCritic in (0..49)) {
                     binding.detailMetaCriticScore.setTextColor(Color.RED)
                     binding.detailMetaCriticScore.setBackgroundResource(R.drawable.back_red)
-                }
-                else{
+                } else {
                     binding.detailMetaCriticScore.visibility = View.GONE
                 }
 
@@ -110,35 +100,37 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 binding.gameDescription.text = viewModel.gameDetail.value?.descriptionRaw
 
                 // information
-                binding.cardViewInformation.releaseDate.text = "Release Date: " + viewModel.gameDetail.value?.releaseDate.toString()
-                binding.cardViewInformation.playtime.text = "Playtime: " + viewModel.gameDetail.value?.playTime.toString() + " hours"
+                binding.cardViewInformation.releaseDate.text =
+                    "Release Date: " + viewModel.gameDetail.value?.releaseDate.toString()
+                binding.cardViewInformation.playtime.text =
+                    "Playtime: " + viewModel.gameDetail.value?.playTime.toString() + " hours"
 
-                if (viewModel.gameDetail.value?.genres?.size!! > 0){
+                if (viewModel.gameDetail.value?.genres?.size!! > 0) {
                     var genresText = ""
-                    for (genre in viewModel.gameDetail.value!!.genres!!){
-                        println(genre.name)
+                    for (genre in viewModel.gameDetail.value!!.genres!!) {
                         genresText += genre.name + ", "
                     }
                     binding.cardViewInformation.genres.text = "Genres: ${genresText.dropLast(2)}"
-                }else{
+                } else {
                     binding.cardViewInformation.genres.visibility = View.GONE
                 }
 
-                if (viewModel.gameDetail.value?.publishers?.size!! > 0){
+                if (viewModel.gameDetail.value?.publishers?.size!! > 0) {
                     var publishersText = ""
-                    for (publisher in viewModel.gameDetail.value!!.publishers!!){
+                    for (publisher in viewModel.gameDetail.value!!.publishers!!) {
                         publishersText += publisher.name + ", "
                     }
-                    binding.cardViewInformation.publishers.text = "Publishers: ${publishersText.dropLast(2)}"
-                }else{
+                    binding.cardViewInformation.publishers.text =
+                        "Publishers: ${publishersText.dropLast(2)}"
+                } else {
                     binding.cardViewInformation.publishers.visibility = View.GONE
                 }
 
                 // URL setup
-                if (viewModel.gameDetail.value?.redditURL?.isEmpty() == true){
+                if (viewModel.gameDetail.value?.redditURL?.isEmpty() == true) {
                     binding.cardViewVisitReddit.visibility = View.GONE
                 }
-                if (viewModel.gameDetail.value?.websiteURL?.isEmpty() == true){
+                if (viewModel.gameDetail.value?.websiteURL?.isEmpty() == true) {
                     binding.cardViewVisitWebsite.visibility = View.GONE
                 }
 
@@ -146,7 +138,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         })
     }
-
 
 
     override fun onCreateView(
@@ -162,10 +153,4 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         super.onDestroyView()
         _binding = null
     }
-
-    fun expandDescription(view: View) {
-        //binding.cardViewDescription.gameDescription.setLines(10)
-    }
-
-
 }
