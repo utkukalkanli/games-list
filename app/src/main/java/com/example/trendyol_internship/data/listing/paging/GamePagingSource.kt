@@ -23,6 +23,7 @@ class GamePagingSource(
     // gets called again and again when we refresh pages
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Game> {
         // we use elvis operator since params.key is null at the beginning
+        println("PAGING SOURCE")
         val page = params.key
             ?: STARTING_PAGE_INDEX // ilk yükleme esnasında key null olacaktır, o zaman STARTING_PAGE_INDEX kullanıyoruz
         return try {

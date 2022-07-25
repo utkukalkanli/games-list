@@ -10,6 +10,7 @@ import javax.inject.Singleton
 class DetailRepository @Inject constructor(private val retroService: NetworkService) {
 
     suspend fun getGameDetailAPIResponse(id: Int): GameDetail {
+        println("DETAIL REPO")
         return retroService.getGameDetailFromAPI(id)
     }
 

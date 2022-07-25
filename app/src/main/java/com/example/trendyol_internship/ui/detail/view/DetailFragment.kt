@@ -65,6 +65,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             startActivity(browserIntent)
         }
         observeLiveData()
+        println("DETAIL FRAGMENT ON VIEW CREATED")
     }
 
     private fun observeLiveData() {

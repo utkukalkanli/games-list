@@ -1,11 +1,13 @@
 package com.example.trendyol_internship
 
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 //import androidx.appcompat.widget.SearchView
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
@@ -39,6 +41,16 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navigationController, null)
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        // Checks the orientation of the screen
+        if (newConfig.orientation === Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show()
+        } else if (newConfig.orientation === Configuration.ORIENTATION_PORTRAIT) {
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
 }
