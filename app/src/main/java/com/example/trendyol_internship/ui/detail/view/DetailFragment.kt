@@ -39,18 +39,18 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
+    private var collapsed = true
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentDetailBinding.bind(view)
 
         binding.scrollView.scrollViewLinearLayout.cardViewDescription.setOnClickListener {
-            if (cardViewDescription.gameDescription.lineCount == 4) {
-                cardViewDescription.gameDescription.setLines(20)
+            if (collapsed) {
+                cardViewDescription.gameDescription.maxLines = Integer.MAX_VALUE
             } else {
-                println(cardViewDescription.gameDescription.lineCount)
-                cardViewDescription.gameDescription.setLines(4)
+                cardViewDescription.gameDescription.maxLines = 4
             }
+            collapsed = !collapsed
         }
         binding.scrollView.scrollViewLinearLayout.cardViewVisitReddit.setOnClickListener {
             val browserIntent =
@@ -74,6 +74,7 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 // render image
                 Glide.with(binding.detailImageView)
                     .load(viewModel.gameDetail.value?.backgroundImage)
+                    //.fitCenter()
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_baseline_search_24)
