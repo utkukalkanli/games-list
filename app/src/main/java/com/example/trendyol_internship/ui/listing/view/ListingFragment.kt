@@ -119,11 +119,9 @@ class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
             val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
             addItemDecoration(decoration)
             adapter = listingAdapter
-            gameListRecyclerView.adapter.apply { }
-            /**
-            binding.buttonRetry.setOnClickListener(
-            // adapter.retry()
-            )*/
+        }
+        binding.buttonRetry.setOnClickListener {
+            listingAdapter.retry()
         }
     }
 
@@ -142,6 +140,7 @@ class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
             findNavController().navigate(action)
         }
     }
+
 
 
 }

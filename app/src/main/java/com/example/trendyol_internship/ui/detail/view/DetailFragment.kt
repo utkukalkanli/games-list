@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.trendyol_internship.R
@@ -63,7 +65,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             startActivity(browserIntent)
         }
         observeLiveData()
-
     }
 
     private fun observeLiveData() {
@@ -74,7 +75,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 // render image
                 Glide.with(binding.detailImageView)
                     .load(viewModel.gameDetail.value?.backgroundImage)
-                    //.fitCenter()
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_baseline_search_24)
@@ -106,7 +106,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                     println(dateObj?.toString())
                     val dateParts = dateObj.toString().split(" ").toTypedArray()
                     val dateString = dateParts[1] + " " + dateParts[2] + ", " + dateParts[5]
-                    println("DATES $dateString")
                     binding.cardViewInformation.releaseDate.text = "Release Date: $dateString"
                     binding.cardViewInformation.playtime.text =
                         "Playtime: " + viewModel.gameDetail.value?.playTime.toString() + " hours"

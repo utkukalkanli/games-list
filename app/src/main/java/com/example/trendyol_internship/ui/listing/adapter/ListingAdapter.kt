@@ -39,8 +39,6 @@ class ListingAdapter(private val listener: OnItemClickListener) :
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .error(R.drawable.ic_baseline_search_24)
                 .into(holder.binding.imageView)
-        } else {
-            println("Game=Null on ListingAdapter !!!")
         }
     }
 

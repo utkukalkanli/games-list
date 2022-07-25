@@ -16,14 +16,14 @@
         <entry key="app/src/main/res/layout/card_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/card_view_game.xml" value="0.1" />
         <entry key="app/src/main/res/layout/detail_fragment.xml" value="0.2947916666666667" />
-        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.25436009451669467" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.12303685232919465" />
         <entry key="app/src/main/res/layout/fragment_listing.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.24377746582031254" />
         <entry key="app/src/main/res/layout/fragment_wishlist.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/game_layout.xml" value="0.215625" />
         <entry key="app/src/main/res/layout/game_list_load_state_footer.xml" value="0.15062302299167796" />
         <entry key="app/src/main/res/layout/game_list_row.xml" value="0.20416666666666666" />
-        <entry key="app/src/main/res/layout/grid_cell.xml" value="0.22135314941406253" />
+        <entry key="app/src/main/res/layout/grid_cell.xml" value="0.20372924804687503" />
         <entry key="app/src/main/res/layout/item_game.xml" value="0.22708333333333333" />
         <entry key="app/src/main/res/layout/item_paging_footer.xml" value="0.2713541666666667" />
         <entry key="app/src/main/res/layout/listing_load_state_footer.xml" value="0.36712845512058423" />
