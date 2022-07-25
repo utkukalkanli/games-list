@@ -101,10 +101,19 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
                 binding.gameDescription.text = viewModel.gameDetail.value?.descriptionRaw
 
                 // information
-                binding.cardViewInformation.releaseDate.text =
-                    "Release Date: " + viewModel.gameDetail.value?.releaseDate.toString()
-                binding.cardViewInformation.playtime.text =
-                    "Playtime: " + viewModel.gameDetail.value?.playTime.toString() + " hours"
+                if (viewModel.gameDetail.value?.releaseDate != null) {
+                    val dateObj = viewModel.gameDetail.value?.releaseDate
+                    println(dateObj?.toString())
+                    val dateParts = dateObj.toString().split(" ").toTypedArray()
+                    val dateString = dateParts[1] + " " + dateParts[2] + ", " + dateParts[5]
+                    println("DATES $dateString")
+                    binding.cardViewInformation.releaseDate.text = "Release Date: $dateString"
+                    binding.cardViewInformation.playtime.text =
+                        "Playtime: " + viewModel.gameDetail.value?.playTime.toString() + " hours"
+                }else{
+                    binding.cardViewInformation.releaseDate.visibility = View.GONE
+                }
+
 
                 if (viewModel.gameDetail.value?.genres?.size!! > 0) {
                     var genresText = ""
