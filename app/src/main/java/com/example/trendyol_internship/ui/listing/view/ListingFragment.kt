@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.trendyol_internship.MainActivity
 import com.example.trendyol_internship.R
 import com.example.trendyol_internship.data.listing.model.Game
 import com.example.trendyol_internship.databinding.FragmentListingBinding
@@ -44,6 +45,7 @@ class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+
         _binding = FragmentListingBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -56,6 +58,7 @@ class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
         setHasOptionsMenu(true)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.search_menu, menu)
@@ -70,7 +73,6 @@ class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
                     binding.gameListRecyclerView.scrollToPosition(0)
                     searchView.clearFocus()
                 }
-
                 return true
             }
 
@@ -112,16 +114,14 @@ class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
     private fun initRecyclerView() {
         gameListRecyclerView.apply {
             itemAnimator =
-                null // recyclerview datası her degistiginde diffutil compare ederken eski dataset flashlıyor ve cok cirkin görünüyor, bu recyclerview animasyonlarını kapatarak bunun önüne geçiyor
+                null // recyclerview data's her degistiginde diffutil compare ederken eski dataset flashlıyor ve cok cirkin görünüyor, bu recyclerview animasyonlarını kapatarak bunun önüne geçiyor
             layoutManager = GridLayoutManager(context, 2)
             val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
             addItemDecoration(decoration)
             adapter = listingAdapter
-            gameListRecyclerView.adapter.apply { }
-            /**
-            binding.buttonRetry.setOnClickListener(
-            // adapter.retry()
-            )*/
+        }
+        binding.buttonRetry.setOnClickListener {
+            listingAdapter.retry()
         }
     }
 
@@ -140,6 +140,7 @@ class ListingFragment : Fragment(), ListingAdapter.OnItemClickListener {
             findNavController().navigate(action)
         }
     }
+
 
 
 }

@@ -11,7 +11,7 @@ import kotlin.collections.ArrayList
 // publishers
 // reddit url
 // website url
-data class GameDetail(
+class GameDetail(
     @SerializedName("id")
     val id: Int?,
 
@@ -31,19 +31,26 @@ data class GameDetail(
     val releaseDate: Date?,
 
     @SerializedName("genres")
-    val genres: ArrayList<String>?,
+    val genres: ArrayList<Genre>?,
 
     @SerializedName("playtime")
     val playTime: Int?,
 
     @SerializedName("publishers")
-    val publishers: ArrayList<String>?,
+    val publishers: ArrayList<Publisher>?,
 
     @SerializedName("reddit_url")
     val redditURL: String?,
 
     @SerializedName("website")
     val websiteURL: String?
-
-)
+){
+    override fun toString(): String {
+        println("ID:$id, name:$name, metacritic:$metaCritic, " +
+                "descriptionRaw:$descriptionRaw, releaseDate:$releaseDate, " +
+                "playtime:$playTime, reddit:$redditURL, " +
+                "website:$websiteURL, backgroundimage:$backgroundImage")
+        return super.toString()
+    }
+}
 
