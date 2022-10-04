@@ -10,7 +10,7 @@ This is a basic Android application that shows list of games(https://rawg.io/api
 </p>
 
 <p align="center">
-  <img src="./arts/preview.png">
+  <img src="./preview.png">
 </p>
 
 
