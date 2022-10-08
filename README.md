@@ -10,9 +10,10 @@ This is a basic Android application that shows list of games(https://rawg.io/api
 </p>
 
 <p align="center">
-  <img src="./preview.png">
+  <img src="/arts/preview.png">
 </p>
 
+<img src="/arts/games.gif" align="right"  width="24%"/>
 
 ## Tech stack
 * ✅ Clean Architecture
